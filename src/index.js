@@ -38,9 +38,29 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
-}
-
+    
+    let MORSE_STRING = [];
+    for (let i of expr.match(/[0-9*]{1,10}/g)) {
+      if (i === "**********") {
+       i = MORSE_STRING.push(" ");
+      } else {
+          let word = [];
+          const arr = i.toString().match(/[0-9*]{1,2}/g);
+              for (let init of arr) {
+                if (init === "10") {
+                  init = word.push(".");
+                }
+                else if (init === "11") {
+                  init = word.push("-");
+                }
+              }
+      let MORSE_WORD = MORSE_TABLE[word.join("")];
+       MORSE_STRING.push(MORSE_WORD);
+        }
+    }
+    return  MORSE_STRING.join('');
+  }
+  
 module.exports = {
     decode
 }
